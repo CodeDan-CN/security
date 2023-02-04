@@ -3,7 +3,7 @@ server:
 
 spring:
   redis:
-    host: 123.60.151.31
+    host: localhost
     port: 6379
     password: redis@2023
     database: 0
@@ -16,7 +16,7 @@ spring:
     timeout: 5000
   datasource:
     # ????
-    url: jdbc:mysql://123.60.151.31:3306/security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai # MySQL????????????SSL?? ????? &useSSL=false
+    url: jdbc:mysql://localhost:3306/security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai # MySQL????????????SSL?? ????? &useSSL=false
     name: security
     username: root
     password: Root@123456
