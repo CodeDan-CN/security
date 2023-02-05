@@ -31,4 +31,8 @@ public class ResponseReusltDTO<T> {
     public static ResponseReusltDTO ok() {
         return new ResponseReusltDTO<>(200, "success");
     }
+
+    public static ResponseReusltDTO fail(String message) {
+        return new ResponseReusltDTO<>(999, message);
+    }
 }

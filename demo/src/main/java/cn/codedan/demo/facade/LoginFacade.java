@@ -36,7 +36,12 @@ public class LoginFacade implements LoginService {
          // 首先将账号密码封装为UsernamePasswordAuthentication形式
         UsernamePasswordAuthenticationToken AuthenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
         // 调用authenticationManager中属于UsernamePasswordAuthenticationToken对象的authenticate方法，如果认证成功，则返回被封装的用户消息authenticate对象，反之为null
-        Authentication authenticate = authenticationManager.authenticate(AuthenticationToken);
+        Authentication authenticate = null;
+//        try {
+            authenticate = authenticationManager.authenticate(AuthenticationToken);
+//        }catch (Exception e){
+//            throw new RuntimeException("登陆失败");
+//        }
         if(authenticate == null){
             throw new RuntimeException("登陆失败");
         }

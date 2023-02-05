@@ -1,4 +1,4 @@
-package cn.codedan.demo.filter;
+package cn.codedan.demo.interception.filter;
 
 import cn.codedan.demo.model.entity.LoginUser;
 import cn.codedan.demo.model.entity.UserInfo;
