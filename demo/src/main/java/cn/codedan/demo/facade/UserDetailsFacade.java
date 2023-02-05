@@ -14,6 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @ClassName: UserDetailsServiceImpl
  * @Description: TODO
@@ -37,7 +40,11 @@ public class UserDetailsFacade implements UserDetailsService {
         if( StringUtils.isEmpty(userInfo) ){
             throw new RuntimeException("用户不存在");
         }
-        return new LoginUser(userInfo);
+        ArrayList<String> authors = new ArrayList<>(Arrays.asList("test", "admin"));
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUser(userInfo);
+        loginUser.setAuthorityNames(authors);
+        return loginUser;
     }
 
     /**

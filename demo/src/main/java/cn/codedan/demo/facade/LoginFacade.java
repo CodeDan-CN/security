@@ -44,9 +44,9 @@ public class LoginFacade implements LoginService {
         LoginUser principal = (LoginUser) authenticate.getPrincipal();
         UserInfo loginUser = principal.getUser();
         String token = JwtUtils.getJwtToken(loginUser.getId().toString());
-        HashMap<String, String> map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>(8);
         map.put("token",token);
-        cache.setCacheObject("login:"+loginUser.getId(),loginUser);
+        cache.setCacheObject("login:"+loginUser.getId(),principal);
         return new ResponseReusltDTO(200,"登陆成功",map);
     }
 }

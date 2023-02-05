@@ -1,8 +1,12 @@
 package cn.codedan.demo.filter;
 
+import cn.codedan.demo.model.entity.LoginUser;
 import cn.codedan.demo.model.entity.UserInfo;
 import cn.codedan.demo.util.JwtUtils;
 import cn.codedan.demo.util.RedisCache;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,12 +43,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         String userid = JwtUtils.getMemberIdByJwtToken(token);
         String redisKey = "login:"+userid;
-        UserInfo user = (UserInfo) redisCache.getCahcheObject(redisKey);
+        LoginUser user = new JSONObject(redisCache.getCahcheObject(redisKey)).toBean(LoginUser.class);
         if(Objects.isNull(user) ){
             throw new RuntimeException("用户未登陆");
         }
+        // 新增权限数据放入
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(user,null,null);
+                new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         filterChain.doFilter(request,response);
     }

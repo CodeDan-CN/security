@@ -1,12 +1,18 @@
 package cn.codedan.demo.model.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @ClassName: LoginUser
@@ -26,12 +32,30 @@ public class LoginUser implements UserDetails {
     private UserInfo user;
 
     /**
-     * 暂时还没有权限，当需要进行鉴权操作的时候，需要这里将数据库的查出来的角色列表进行GrantedAuthority转化
+     * 权限存储集合
+     */
+    private List<String> authorityNames;
+
+    /**
+     * 权限存储集合
+     */
+    @JSONField(serialize = false)
+    private List<GrantedAuthority> authorities;
+
+    /**
+     * 这里将数据库的查出来的角色列表进行GrantedAuthority转化
      * @return
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(StringUtils.isEmpty(authorities)){
+            ArrayList<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+            for( String authorityName : authorityNames){
+                grantedAuthorities.add(new SimpleGrantedAuthority(authorityName));
+            }
+            this.authorities = grantedAuthorities;
+        }
+        return authorities;
     }
 
     /**
