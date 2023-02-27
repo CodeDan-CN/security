@@ -86,7 +86,7 @@ public class AuthorizationServerAdapterConfig extends AuthorizationServerConfigu
                 // 发放token的权限范围
                 .scopes("all")
                 // 重定向资源服务器地址并携带上code
-                .redirectUris("http://localhost:8082/index.html");
+                .redirectUris("http://localhost:8082/client/hello");
     }
 
 

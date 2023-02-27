@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="resource-server" />
+        <module name="authorization-server" />
         <module name="third-client-server" />
         <module name="authorization-server-memory" />
       </profile>
@@ -15,6 +16,7 @@
     <bytecodeTargetLevel>
       <module name="demo" target="1.8" />
       <module name="oauth2.0" target="1.8" />
+      <module name="oauth2.0-authorization-code" target="1.8" />
       <module name="oidc1.0" target="1.8" />
     </bytecodeTargetLevel>
   </component>
