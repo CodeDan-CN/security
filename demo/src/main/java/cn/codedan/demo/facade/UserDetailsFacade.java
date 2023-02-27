@@ -35,7 +35,7 @@ public class UserDetailsFacade implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userAccount) throws UsernameNotFoundException {
-        // 查询用户信息(采用假数据)
+        // 查询用户信息
         UserInfo userInfo = userInfoService.getOne(new QueryWrapper<UserInfo>().lambda().eq(UserInfo::getUserName, userAccount));
         if( StringUtils.isEmpty(userInfo) ){
             throw new RuntimeException("用户不存在");
