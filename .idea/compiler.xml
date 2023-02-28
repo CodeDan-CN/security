@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="resource-server" />
-        <module name="authorization-server" />
         <module name="third-client-server" />
         <module name="authorization-server-memory" />
       </profile>
