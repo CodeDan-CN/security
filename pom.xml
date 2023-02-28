@@ -12,6 +12,7 @@
         <module>authorization-server-memory</module>
         <module>resource-server</module>
         <module>third-client-server</module>
+        <module>authorization-server-database</module>
     </modules>
 
     <properties>
@@ -61,26 +62,6 @@
             <artifactId>hutool-all</artifactId>
             <version>4.6.2</version>
         </dependency>
-
-
-
-
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>druid</artifactId>-->
-<!--            <version>1.0.18</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--            <version>3.3.2</version>-->
-<!--        </dependency>-->
 
     </dependencies>
 

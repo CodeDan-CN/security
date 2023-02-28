@@ -50,6 +50,4 @@ public class ResourceAdapterConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest().authenticated();
     }
-
-
 }
