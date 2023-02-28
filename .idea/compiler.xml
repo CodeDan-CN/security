@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo" target="1.8" />
-      <module name="oauth2.0" target="1.8" />
-      <module name="oauth2.0-authorization-code" target="1.8" />
-      <module name="oidc1.0" target="1.8" />
+      <module name="authorization-server-memory" target="1.8" />
+      <module name="resource-server" target="1.8" />
+      <module name="third-client-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
