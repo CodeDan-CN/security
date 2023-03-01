@@ -27,7 +27,6 @@ public class ResourceAdapterConfig extends ResourceServerConfigurerAdapter {
     RemoteTokenServices tokenServices() {
         RemoteTokenServices services = new RemoteTokenServices();
         services.setCheckTokenEndpointUrl("http://localhost:8081/oauth/check_token");
-        // 内存伪造的客户端数据
         services.setClientId("myClient");
         services.setClientSecret("123");
         return services;
