@@ -8,14 +8,13 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 
  * @TableName map_role_permission
  */
 @TableName(value ="map_role_permission")
 @Data
 public class MapRolePermission implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -27,7 +26,7 @@ public class MapRolePermission implements Serializable {
     private Integer roleId;
 
     /**
-     * 
+     *
      */
     @TableField(value = "permission_id")
     private Integer permissionId;

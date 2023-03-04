@@ -1,12 +1,12 @@
 package cn.codedan.config;
 
 import cn.codedan.common.JdbcTokenStoreUserApprovalHandler;
+import cn.codedan.facade.UserDetailFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -38,31 +38,17 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Resource
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    TokenStore tokenStore;
-
-    @Autowired
-    ClientDetailsService clientDetailsService;
-
+    @Bean
+    public ClientDetailsService clientDetailsService() {
+        return new JdbcClientDetailsService(dataSource);
+    }
 
     @Bean
     public TokenStore jdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
     }
 
-    @Bean
-    public ClientDetailsService clientDetailsService() {
-        return new JdbcClientDetailsService(dataSource);
-    }
+
 
     @Bean
     AuthorizationServerTokenServices tokenServices() {
@@ -91,6 +77,22 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
         return approvalHandler;
     }
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Resource
+    private UserDetailFacade userDetailFacade;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    TokenStore tokenStore;
+
+    @Autowired
+    ClientDetailsService clientDetailsService;
+
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 配置数据从oauth_client_details表读取来存储
@@ -103,7 +105,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 //自定义AccessToken
                 //.accessTokenConverter(accessTokenConverter)
                 //设置userDetailsService
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailFacade)
                 //授权码储存
                 .authorizationCodeServices(authorizationCodeServices())
                 //设置userApprovalHandler
