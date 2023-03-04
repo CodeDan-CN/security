@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="authorization-server-database" target="1.8" />
       <module name="authorization-server-memory" target="1.8" />
       <module name="resource-server" target="1.8" />
       <module name="third-client-server" target="1.8" />
