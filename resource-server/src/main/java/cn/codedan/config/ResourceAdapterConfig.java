@@ -27,8 +27,8 @@ public class ResourceAdapterConfig extends ResourceServerConfigurerAdapter {
     RemoteTokenServices tokenServices() {
         RemoteTokenServices services = new RemoteTokenServices();
         services.setCheckTokenEndpointUrl("http://localhost:8081/oauth/check_token");
-        services.setClientId("myClient");
-        services.setClientSecret("123");
+        services.setClientId("oa");
+        services.setClientSecret("123456");
         return services;
     }
 
@@ -38,7 +38,7 @@ public class ResourceAdapterConfig extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("res1").tokenServices(tokenServices());
+        resources.tokenServices(tokenServices());
     }
 
     /**

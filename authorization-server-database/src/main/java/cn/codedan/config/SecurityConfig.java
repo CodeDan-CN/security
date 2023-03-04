@@ -51,12 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 // 配置Basic登录
                 //.and().httpBasic()
-                .and().authorizeRequests().antMatchers( "/login/**", "/authorization","/logout/**").permitAll()
+                .and().authorizeRequests().antMatchers( "/login/**", "/authorization/**","/logout/**").permitAll()
                 // 其余所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 // 关闭跨域保护;
                 .and().csrf().disable();
     }
-
-
 }

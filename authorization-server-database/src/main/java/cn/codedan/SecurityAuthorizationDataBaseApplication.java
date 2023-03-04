@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Version: 1.0.0
  **/
 @SpringBootApplication
-@MapperScan(basePackages = {"cn.codedan.mapper"})
+@MapperScan("cn.codedan.mapper")
 public class SecurityAuthorizationDataBaseApplication {
     public static void main(String[] args) {
         SpringApplication.run(SecurityAuthorizationDataBaseApplication.class,args);

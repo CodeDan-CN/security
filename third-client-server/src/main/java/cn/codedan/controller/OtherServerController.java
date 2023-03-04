@@ -45,9 +45,9 @@ public class OtherServerController {
         // 这里的code没有好说的
         requestQuery.add("code",code);
         // 当前客户端在授权服务器中注册的client_id
-        requestQuery.add("client_id","myClient");
+        requestQuery.add("client_id","oa");
         // 当前客户端在授权服务器中注册的client_secret
-        requestQuery.add("client_secret","123");
+        requestQuery.add("client_secret","123456");
         // 这个数据存在的意义在于校验code，这里的跳转地址要和应用在授权服务器注册时使用的地址一致
         requestQuery.add("redirect_uri", "http://localhost:8082/client/hello");
         // 授权类型

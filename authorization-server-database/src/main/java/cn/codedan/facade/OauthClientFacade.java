@@ -6,6 +6,7 @@ import cn.codedan.service.OauthClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,8 @@ public class OauthClientFacade {
 
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * 新增一个客户端数据
@@ -30,7 +33,7 @@ public class OauthClientFacade {
         OauthClientDetails oauthClientDetails = new OauthClientDetails();
         BeanUtils.copyProperties(oauthClientInfoReqDTO,oauthClientDetails);
         log.info("存储客户端消息为:{}",oauthClientDetails);
+        oauthClientDetails.setClientSecret(passwordEncoder.encode(oauthClientDetails.getClientSecret()));
         oauthClientDetailsService.save(oauthClientDetails);
     }
-
 }
