@@ -1,7 +1,6 @@
 package cn.codedan.config;
 
 import cn.codedan.common.JdbcTokenStoreUserApprovalHandler;
-import cn.codedan.facade.UserDetailFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +22,6 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -65,11 +62,10 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     public OAuth2RequestFactory oAuth2RequestFactory() {
         return new DefaultOAuth2RequestFactory(clientDetailsService());
     }
-
-    @Bean
-    public AuthorizationCodeServices authorizationCodeServices() {
-        return new JdbcAuthorizationCodeServices(dataSource);
-    }
+//    @Bean
+//    public AuthorizationCodeServices authorizationCodeServices() {
+//        return new JdbcAuthorizationCodeServices(dataSource);
+//    }
     @Bean
     public UserApprovalHandler userApprovalHandler() {
         JdbcTokenStoreUserApprovalHandler approvalHandler = new JdbcTokenStoreUserApprovalHandler();
@@ -81,9 +77,6 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Resource
-    private UserDetailFacade userDetailFacade;
-
     @Autowired
     private DataSource dataSource;
 
@@ -92,7 +85,6 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     ClientDetailsService clientDetailsService;
-
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -111,9 +103,9 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 //自定义AccessToken
                 //.accessTokenConverter(accessTokenConverter)
                 //设置userDetailsService
-                .userDetailsService(userDetailFacade)
+                //.userDetailsService(userDetailFacade)
                 //授权码储存
-                .authorizationCodeServices(authorizationCodeServices())
+//                .authorizationCodeServices(authorizationCodeServices())
                 //设置userApprovalHandler
                 .userApprovalHandler(userApprovalHandler())
                 //设置tokenServices

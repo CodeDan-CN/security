@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: redis@2023
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    timeout: 5000
+  datasource:
+    # ????
+    url: jdbc:mysql://123.60.151.31:3306/security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai # MySQL????????????SSL?? ????? &useSSL=false
+    name: security
+    username: root
+    password: Root@123456
+    # ??druid???
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  main:
+    allow-bean-definition-overriding: true

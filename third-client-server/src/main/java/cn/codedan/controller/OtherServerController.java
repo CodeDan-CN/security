@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,47 @@ public class OtherServerController {
         requestQuery.add("redirect_uri", "http://localhost:8082/client/hello");
         // 授权类型
         requestQuery.add("grant_type","authorization_code");
+        // 发起请求
+        Map<String,String> response = restTemplate.postForObject("http://localhost:8081/oauth/token", requestQuery, Map.class);
+        // 提取token
+        String access_token = response.get("access_token");
+        System.out.println("access_token:"+access_token);
+        // 装配一下access_token访问资源服务器的请求
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Bearer "+access_token);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:8080/info/get", HttpMethod.GET, httpEntity, String.class);
+        return exchange.getBody();
+    }
+
+
+    @GetMapping("/password")
+    public String password(String username,String password){
+        MultiValueMap<String, String> requestQuery = new LinkedMultiValueMap<>();
+        requestQuery.add("username", username);
+        requestQuery.add("password", password);
+        requestQuery.add("client_secret", "123456");
+        requestQuery.add("client_id", "myapp");
+        requestQuery.add("grant_type", "password");
+        // 发起请求
+        Map<String,String> response = restTemplate.postForObject("http://localhost:8081/oauth/token", requestQuery, Map.class);
+        // 提取token
+        String access_token = response.get("access_token");
+        System.out.println("access_token:"+access_token);
+        // 装配一下access_token访问资源服务器的请求
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Bearer "+access_token);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(httpHeaders);
+        ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:8080/info/get", HttpMethod.GET, httpEntity, String.class);
+        return exchange.getBody();
+    }
+
+    @GetMapping("/clientModel")
+    public String clientModel(){
+        MultiValueMap<String, String> requestQuery = new LinkedMultiValueMap<>();
+        requestQuery.add("client_secret", "123456");
+        requestQuery.add("client_id", "myclient");
+        requestQuery.add("grant_type", "client_credentials");
         // 发起请求
         Map<String,String> response = restTemplate.postForObject("http://localhost:8081/oauth/token", requestQuery, Map.class);
         // 提取token
