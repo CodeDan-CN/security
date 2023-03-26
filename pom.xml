@@ -9,12 +9,9 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>authorization-server-memory</module>
         <module>resource-server</module>
         <module>third-client-server</module>
-        <module>authorization-server-database</module>
         <module>password-server-database</module>
-        <module>client-server-database</module>
     </modules>
 
     <properties>
