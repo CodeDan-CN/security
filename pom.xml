@@ -13,8 +13,8 @@
         <module>resource-server</module>
         <module>third-client-server</module>
         <module>authorization-server-database</module>
-        <module>password-server-database</module>
-        <module>client-server-database</module>
+<!--        <module>password-server-database</module>-->
+<!--        <module>client-server-database</module>-->
     </modules>
 
     <properties>
